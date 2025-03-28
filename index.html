@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TECHNO</title>
+    <style>
+        /* Style général */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #121212;
+            overflow: hidden;
+        }
+
+        /* Arrière-plan avec noms animés */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .name {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.5);
+            animation: float 10s infinite linear;
+        }
+
+        @keyframes float {
+            from {
+                transform: translate(-100%, -100%);
+            }
+            to {
+                transform: translate(100%, 100%);
+            }
+        }
+
+        /* Bouton stylé */
+        .button-container {
+            z-index: 1;
+        }
+
+        .button {
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(45deg, #ff6b6b, #f8e71c);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Arrière-plan -->
+    <div class="background">
+        <div class="name" style="top:10%; left:20%;">Alexis</div>
+        <div class="name" style="top:50%; left:60%;">Côme</div>
+        <div class="name" style="top:80%; left:30%;">Arthur</div>
+        <div class="name" style="top:40%; left:70%;">Raphaël</div>
+    </div>
+
+    <!-- Bouton -->
+    <div class="button-container">
+        <button class="button" onclick="activateNotifications()">Activer les notifications</button>
+    </div>
+
+    <script>
+        function activateNotifications() {
+            // Vérifie si les notifications sont prises en charge
+            if (!("Notification" in window)) {
+                alert("Votre navigateur ne prend pas en charge les notifications.");
+                return;
+            }
+
+            // Demande la permission pour envoyer des notifications
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    // Envoie une notification si la permission est accordée
+                    const options = {
+                        body: "Merci d'avoir activé les notifications !",
+                        icon: "https://via.placeholder.com/128", // Icône optionnelle
+                    };
+                    new Notification("Notifications activées !", options);
+                } else {
+                    alert("Vous avez refusé les notifications.");
+                }
+            });
+        }
+    </script>
+</body>
+</html>
